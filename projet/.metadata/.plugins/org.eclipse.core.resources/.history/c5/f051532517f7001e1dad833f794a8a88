@@ -1,0 +1,123 @@
+
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.*;
+
+/**
+ * Servlet implementation class Myservlet
+ */
+public class Myservlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Myservlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		PrintWriter display = response.getWriter();
+		display.println("<html>"
+				+ "<head>"
+					+ "<title>Methode de Gauss</title>"
+					+ " <meta charset=\"UTF-8\">"
+					+ "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+					+ "<link rel=\"stylesheet\" href=\"style.css\">"
+				+ "</head>"
+				+ "<body>"
+					+ "<h1>Les contenus de la matrice</h1>"
+					+ "<form method='POST' action='Myservlet'>"
+					+ " <label for='dimension'>Dimension : </label><input type='text' name='dimension'>"
+					+ "<p><button type='submit'>ENTREZ</button></p>"
+				+ "</body>"
+			+ "</html>");
+		
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		// Récupérer la dimension de la matrice à partir du formulaire
+			int dimension = Integer.parseInt(request.getParameter("dimension"));
+
+	    // Générer les champs de saisie pour la matrice A
+	    	StringBuilder formBuilder = new StringBuilder();	// construction de chaine de caractères contenant les valeurs saisies de la matrice
+	    		for (int i = 0; i < dimension; i++) {
+	    			for (int j = 0; j < dimension; j++) {
+	    				formBuilder.append("<html><p><label for='A[").append(i).append("][").append(j).append("]'>A[").append(i).append("][").append(j).append("] :  </label>");
+	    				formBuilder.append("<input type='text' id='A[").append(i).append("][").append(j).append("]' name='A[").append(i).append("][").append(j).append("]'><br></p>");
+	    			}
+	        
+	    		}
+
+	    // Générer les champs de saisie pour le vecteur b
+	    		for (int i = 0; i < dimension; i++) {
+	    		formBuilder.append("<p><label for='b[").append(i).append("]'>B[").append(i + 1).append("] :  </label>");
+	    		formBuilder.append("<input type='text' id='b[").append(i).append("]' name='b[").append(i).append("]'><br></p></html>");
+	    	}
+
+		 // Ajouter le formulaire généré à la requête
+	    	request.setAttribute("champsMatrice", formBuilder.toString());
+
+	    // Transférer le contrôle à la page JSP 'traitement.jsp'
+	    	RequestDispatcher traitement = request.getRequestDispatcher("traitement.jsp");
+	    	traitement.forward(request, response);
+	   	
+	    // Récupération des paramètres d'entrées
+	    	double[][] matriceA = new double[dimension][dimension];
+	    	  for (int i = 0; i < dimension; i++) {
+	    	    for (int j = 0; j < dimension; j++) {
+	    	      String valeur = request.getParameter("A[" + i + "][" + j + "]");
+	    	      if (valeur != null) {
+	    	        matriceA[i][j] = Double.parseDouble(valeur);
+	    	      }
+	    	    }
+	    	  }
+	    
+	    	double[] vecteurB = new double[dimension];
+	    	    for (int i = 0; i < dimension; i++) {
+	    	       String vecteur = request.getParameter("b[" + i + "]");
+	    	       	if(vecteur!=null) {
+	    	        vecteurB[i] = Double.parseDouble(vecteur);
+	    	       	}
+	    	    }
+	    	    
+	    	request.setAttribute("matrice", matriceA);
+	    	request.setAttribute("vecteur", vecteurB);
+//	    
+//	    	RequestDispatcher methode = request.getRequestDispatcher("MethodeGauss.java");
+//	    	methode.forward(request, response);
+
+	    	 
+	   // Instanciation
+	    	MethodeGauss gauss = new MethodeGauss();
+	    	
+	    	gauss.triangulaire(matrice,vecteur);
+	    	double[] solution = gauss.resolution( matrice , vecteur);
+	    	
+	    	if(solution!=null) {
+	    	for (int i = 0; i < solution.length; i++) {
+	    	    System.out.println("<p> x " + (i + 1) + " = " + solution[i] + "</p>");
+	    		}
+	    	}
+        //doGet(request, response);
+	}
+
+}

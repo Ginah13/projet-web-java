@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+/home/mit/web-java/eclipse-workspace/projet/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+3306659387.index
+851074164.index
+2747905828.index
+1697760848.index
+1667402969.index
+3827961944.index
+1419646814.index

@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Valeurs de la matrice</title>
+</head>
+<body>
+    <h1>Les valeurs de la matrice</h1>
+    <form method="post" action="Myservlet">
+    <%
+        // Récupération de la chaîne de caractères contenant les champs de saisie générés dans doPost
+        String champsMatrice =(String) request.getAttribute("champsMatrice");
+        if (champsMatrice != null) {
+            out.println("<p><b>Champs de saisie générés :</b></p>");
+            out.println("<div>" + champsMatrice + "</div>");
+        } else {
+            out.println("<p>Aucun champ de saisie généré.</p>");
+        }
+
+     	/*  // Notez que vous devrez ajuster cette partie pour récupérer et traiter toutes les valeurs nécessaires
+        String valeurExemple = request.getParameter("A[0][0]");
+        if (valeurExemple != null) {
+            out.println("<p>Valeur de A[0][0] : " + valeurExemple + "</p>");
+        } else {
+            out.println("<p>Aucune valeur pour A[0][0] reçue.</p>");
+        }*/   
+    %>
+    <button type="submit">ENTREZ</button>
+    	</form>
+    </body>
+</html>

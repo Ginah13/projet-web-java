@@ -1,0 +1,45 @@
+
+public class MethodeGauss {
+	
+    public MethodeGauss() {
+    }
+
+    /**
+     * Méthode pour transformer la matrice A en matrice triangulaire supérieure.
+     * @param matriceA La matrice A à transformer.
+     * @param vecteurB Le vecteur B du système d'équations.
+     */
+    public void triangulaire(double[][] matriceA, double[] vecteurB) {
+        int n = matriceA.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                double facteur = matriceA[j][i] / matriceA[i][i];
+                for (int k = 0; k < n; k++) {
+                    matriceA[j][k] -= facteur * matriceA[i][k];
+                }
+                vecteurB[j] -= facteur * vecteurB[i];
+            }
+        }
+    }
+
+    /**
+     * Méthode pour résoudre le système d'équations linéaires A*x = B en utilisant la matrice triangulaire supérieure.
+     * @param matriceA La matrice A triangulaire supérieure.
+     * @param vecteurB Le vecteur B du système d'équations.
+     * @return Le vecteur X solution du système.
+     */
+    public double[] resolution(double[][] matriceA, double[] vecteurB) {
+        int n = matriceA.length;
+        double[] solution = new double[n];
+        for (int i = n - 1; i >= 0; i--) {
+            double somme = 0;
+            for (int j = i + 1; j < n; j++) {
+                somme += matriceA[i][j] * solution[j];
+            }
+            solution[i] = (vecteurB[i] - somme) / matriceA[i][i];
+        }
+        return solution;
+    }
+}
+
+

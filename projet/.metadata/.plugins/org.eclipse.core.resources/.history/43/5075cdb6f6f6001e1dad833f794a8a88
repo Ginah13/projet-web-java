@@ -1,0 +1,14 @@
+
+public class MethodeGauss {
+	
+    public MethodeGauss() {
+    }
+
+    public void triangulaire(double[][] matriceA, double[] vecteurB) {
+        
+    }
+
+    public void resolution(double[][] matriceA, double[] vecteurB) {
+        
+    }
+}

@@ -1,0 +1,13 @@
+
+public class MethodeGauss {
+    public MethodeGauss() {
+    }
+
+    public void triangulaire(double[][] matriceA, double[] vecteurB) {
+        // Implémentez la logique ici
+    }
+
+    public void resolution(double[][] matriceA, double[] vecteurB) {
+        // Implémentez la logique ici
+    }
+}

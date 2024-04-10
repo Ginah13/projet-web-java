@@ -1,0 +1,18 @@
+
+public class MethodeGauss{
+	
+	public MethodeGauss(){
+		
+	}
+	
+	public void triangulaire(){
+		
+		
+	}
+	
+	public void resolution(){
+		
+	}
+	
+	
+	}

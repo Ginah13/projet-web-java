@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Valeurs de la matrice</title>
+</head>
+<body>
+    <h1>Les valeurs de la matrice</h1>
+    <form method="post" action="Myservel">
+    <%
+        // Récupération de la chaîne de caractères contenant les champs de saisie générés dans doPost
+        String champsMatrice =(String) request.getAttribute("champsMatrice");
+        if (champsMatrice != null) {
+            out.println("<p><b>Champs de saisie générés :</b></p>");
+            out.println("<div>" + champsMatrice + "</div>");
+        } else {
+            out.println("<p>Aucun champ de saisie généré.</p>");
+        }
+    %>
+    <%
+		double[][] matrice = (double[][]) request.getAttribute("matrice");
+		//double[] vecteur = (double[]) request.getAttribute("vecteur");
+		
+			if(matrice != null) {
+				for (int i = 0; i < matrice.length; i++) {
+	    			out.println("<p> A " +  matrice + "</p>");
+				}
+			}else {
+		            out.println("<p>Aucun</p>");
+		        }
+	%>
+   
+    <button type="submit">ENTREZ</button>
+    	</form>
+    </body>
+</html>

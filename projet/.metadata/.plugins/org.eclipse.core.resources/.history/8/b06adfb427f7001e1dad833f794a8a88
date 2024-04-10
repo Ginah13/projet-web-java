@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Les matrices</title>
+</head>
+<body>
+	<form method="POST" action="">
+	
+	<%
+		double[][] matrice = (double[][]) request.getAttribute("matrice");
+		//double[] vecteur = (double[]) request.getAttribute("vecteur");
+
+		 int n = matrice.length;
+	        for (int i = 0; i < n - 1; i++) {
+	            for (int j = i + 1; j < n; j++) {
+	                double facteur = matrice[j][i] / matrice[i][i];
+	                for (int k = 0; k < n; k++) {
+	                   matrice[j][k] -= facteur * matrice[i][k];
+	                }
+	                vecteur[j] -= facteur * vecteur[i];
+	            }
+	        }
+
+	
+		%>
+	
+	
+	</form>
+</body>
+</html>
